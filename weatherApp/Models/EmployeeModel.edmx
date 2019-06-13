@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EmployeeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="126" />
+          <Property Name="City" Type="nvarchar" MaxLength="52" />
+          <Property Name="AddressType" Type="bit" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="52" />
+          <Property Name="empRole" Type="nvarchar" MaxLength="25" />
+          <Property Name="email" Type="nvarchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="TelephoneNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PhoneNumb" Type="nvarchar" MaxLength="25" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_EMPID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="TelephoneNumber" Type="Self.TelephoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TelephoneNumber">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_EMPLOYEEID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeDBModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TelephoneNumber" EntityType="Self.TelephoneNumber" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_EMPID" Association="Self.fk_EMPID">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="TelephoneNumber" EntitySet="TelephoneNumber" />
+          </AssociationSet>
+          <AssociationSet Name="fk_EMPLOYEEID" Association="Self.fk_EMPLOYEEID">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmployeeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="52" FixedLength="false" Unicode="true" />
+          <Property Name="AddressType" Type="Boolean" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_EMPLOYEEID" FromRole="Address" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country" Type="String" MaxLength="52" FixedLength="false" Unicode="true" />
+          <Property Name="empRole" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Address" Relationship="Self.fk_EMPLOYEEID" FromRole="Employee" ToRole="Address" />
+          <NavigationProperty Name="TelephoneNumber" Relationship="Self.fk_EMPID" FromRole="Employee" ToRole="TelephoneNumber" />
+        </EntityType>
+        <EntityType Name="TelephoneNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumb" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_EMPID" FromRole="TelephoneNumber" ToRole="Employee" />
+        </EntityType>
+        <Association Name="fk_EMPLOYEEID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_EMPID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="TelephoneNumber" Type="Self.TelephoneNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TelephoneNumber">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmployeeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Address" EntityType="Self.Address" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="TelephoneNumber" EntityType="Self.TelephoneNumber" />
+          <AssociationSet Name="fk_EMPLOYEEID" Association="Self.fk_EMPLOYEEID">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="fk_EMPID" Association="Self.fk_EMPID">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="TelephoneNumber" EntitySet="TelephoneNumber" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmployeeDBModelStoreContainer" CdmEntityContainer="EmployeeDBEntities">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Address1" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="EmployeeDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="empRole" ColumnName="empRole" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TelephoneNumber">
+            <EntityTypeMapping TypeName="EmployeeDBModel.TelephoneNumber">
+              <MappingFragment StoreEntitySet="TelephoneNumber">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PhoneNumb" ColumnName="PhoneNumb" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

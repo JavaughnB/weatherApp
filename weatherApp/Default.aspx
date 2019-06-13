@@ -3,366 +3,50 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+	<%--Handles city selection--%>
+	<br />
 	<div class="row">
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgWeatherIcon" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblCity" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgCountryFlag" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblDescription" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblHumidity" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMin" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMax" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblTempDay" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblDate" runat="server"></asp:Label>
-				</li>
-			</ul>
+		<div class="col-sm-4">
+			<asp:Label ID="lblCityInput" CssClass="form-control" runat="server">Please enter the name of the city</asp:Label>
 		</div>
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgWeatherIconDay2" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblCityDay2" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgCountryFlagDay2" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblDescriptionDay2" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblHumidityDay2" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMinDay2" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMaxDay2" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblTempDayDay2" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblDate2" runat="server"></asp:Label>
-				</li>
-			</ul>
+		<div class="col-sm-3">
+			<asp:TextBox ID="txtCity" CssClass="form-control" runat="server"></asp:TextBox>
 		</div>
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgWeatherIconDay3" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblCityDay3" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgCountryFlagDay3" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblDescriptionDay3" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblHumidityDay3" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMinDay3" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMaxDay3" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblTempDayDay3" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblDate3" runat="server"></asp:Label>
-				</li>
-			</ul>
+		<div class="col-sm-3">
+			<asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtCity" ErrorMessage="Can't be left Empty" runat="server"></asp:RequiredFieldValidator>
+			<asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+		</div>
+		<div class="col-sm-3">
+			<asp:Button ID="btnEnterCity" runat="server" CssClass="form-control" Text="Submit" OnClick="btnEnterCity_Click" />
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgWeatherIconDay4" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblCityDay4" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgCountryFlagDay4" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblDescriptionDay4" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblHumidityDay4" runat="server"></asp:Label>
+			<asp:Repeater ID="rptrWeather" runat="server" OnItemDataBound="rptrWeather_ItemCommand">
+				<ItemTemplate>
 
-				</li>
-				<li>
-					<asp:Label ID="lblTempMinDay4" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMaxDay4" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblTempDayDay4" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblDate4" runat="server"></asp:Label>
-				</li>
-			</ul>
-		</div>
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgWeatherIconDay5" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblCityDay5" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgCountryFlagDay5" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblDescriptionDay5" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblHumidityDay5" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMinDay5" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblTempMaxDay5" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblTempDayDay5" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblDate5" runat="server"></asp:Label>
-				</li>
-			</ul>
-		</div>
-		<div class="col-4">
-		</div>
+					<ul>
+						<li>
+							<asp:Image ID="imgActive" ImageUrl="~/IMAGE_NAME" runat="server" /></li>
+						<li>
+							<asp:Label ID="lblDescription" runat="server"></asp:Label></li>
+						<li>
+							<asp:Label ID="lblTemp" runat="server"></asp:Label></li>
+						<li>
+							<asp:Label ID="lblHumidity" runat="server"></asp:Label></li>
+						<li>
+							<asp:Label ID="lblDate" runat="server"></asp:Label>
+						</li>
+						<li>
+							<asp:Label ID ="lblDay" runat="server"></asp:Label>
+						</li>
+					</ul>
+				</ItemTemplate>
+			</asp:Repeater>
 	</div>
+	<br/>
 	<div class="row">
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgMBayWeatherIconDay" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayCityDay" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgMBayCountryFlagDay" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayDescriptionDay" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayHumidityDay" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMinDay" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMaxDay" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempDayDay" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempNightDay" runat="server"></asp:Label>
-				</li>
-			</ul>
+		<div class="col-sm-4">
+				<asp:Button ID="btnEmailSubmit" CssClass="form-control" runat="server" Text="Notify" OnClick="btnEmailSubmit_Click" />
 			</div>
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgMBayWeatherIconDay2" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayCityDay2" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgMBayCountryFlagDay2" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayDescriptionDay2" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayHumidityDay2" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMinDay2" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMaxDay2" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempDayDay2" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempNightDay2" runat="server"></asp:Label>
-				</li>
-			</ul>
-			</div>
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgMBayWeatherIconDay3" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayCityDay3" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgMBayCountryFlagDay3" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayDescriptionDay3" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayHumidityDay3" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMinDay3" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMaxDay3" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempDayDay3" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempNightDay3" runat="server"></asp:Label>
-				</li>
-			</ul>
-			</div>
-		</div>
-	<div class="row">
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgMBayWeatherIconDay4" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayCityDay4" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgMBayCountryFlagDay4" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayDescriptionDay4" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayHumidityDay4" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMinDay4" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMaxDay4" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempDayDay4" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempNightDay4" runat="server"></asp:Label>
-				</li>
-			</ul>
-			</div>
-		<div class="col-4">
-			<ul>
-				<li>
-					<asp:Image ID="imgMBayWeatherIconDay5" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayCityDay5" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Image ID="imgMBayCountryFlagDay5" runat="server" />
-				</li>
-				<li>
-					<asp:Label ID="lblMBayDescriptionDay5" runat="server"> </asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayHumidityDay5" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMinDay5" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempMaxDay5" runat="server"></asp:Label>
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempDayDay5" runat="server"></asp:Label>
-
-				</li>
-				<li>
-					<asp:Label ID="lblMBayTempNightDay5" runat="server"></asp:Label>
-				</li>
-			</ul>
-			</div>
-		</div>
-	<div class="row">
-		<div class="col-4">
-			<ul>
-				<li>
-
-					<asp:Button runat="server" ID="btnNotifAll" Text="Notify All Employees" OnClick="btnNotifAll_Click" />
-				</li>
-			
-			</ul>
-
-		</div>
 	</div>
 </asp:Content>

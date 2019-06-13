@@ -13,10 +13,10 @@ namespace weatherApp.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EmployeeEntities : DbContext
+    public partial class EmployeeDBEntities : DbContext
     {
-        public EmployeeEntities()
-            : base("name=EmployeeEntities")
+        public EmployeeDBEntities()
+            : base("name=EmployeeDBEntities")
         {
         }
     
@@ -25,6 +25,8 @@ namespace weatherApp.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<TelephoneNumber> TelephoneNumber { get; set; }
     }
 }

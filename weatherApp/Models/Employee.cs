@@ -14,13 +14,21 @@ namespace weatherApp.Models
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.Address = new HashSet<Address>();
+            this.TelephoneNumber = new HashSet<TelephoneNumber>();
+        }
+    
         public int Id { get; set; }
-        public string address1 { get; set; }
-        public string city { get; set; }
         public string country { get; set; }
-        public string telephoneNo { get; set; }
         public string empRole { get; set; }
         public string email { get; set; }
-        public string addressLocation { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Address> Address { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TelephoneNumber> TelephoneNumber { get; set; }
     }
 }
