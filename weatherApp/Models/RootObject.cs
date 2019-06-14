@@ -27,7 +27,7 @@ namespace weatherApp.Models
 		 
 			//api.openweathermap.org/data/2.5/forecast?q={city name},{country code}cnt=6
 			//This calls the weather API and assign it to an object
-		    string url = string.Format("https://api.openweathermap.org/data/2.5/forecast?q={0},jm&APPID={1}&units=metric", cityName, "542ffd081e67f4512b705f89d2a611b2");
+		    string url = string.Format("https://api.openweathermap.org/data/2.5/forecast?q={0},jm&APPID={1}&units=metric", cityName,  System.Configuration.ConfigurationManager.AppSettings["OWAKey"]);
 			using (WebClient client = new WebClient())
 			{
 				//Get the root object and place it in jsnon file

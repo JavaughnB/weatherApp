@@ -89,8 +89,8 @@ namespace weatherApp.Models
 
 		public void sendMail(String message,String email)
 		{
-			string emailSender = "thisbeatestmyg@outlook.com";
-			string password = "ThisIsAtestpassword1000";
+			string emailSender = System.Configuration.ConfigurationManager.AppSettings["senderEmail"];
+			string password = System.Configuration.ConfigurationManager.AppSettings["senderPassword"];
 			//
 			SmtpClient client = new SmtpClient();
 			client.Port = 587;
